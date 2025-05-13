@@ -4,32 +4,29 @@ import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
   const router = useRouter();
-  const isActive: (pathname: string) => boolean = (pathname) =>
-    router.pathname === pathname;
+  const isActive = (pathname: string) => router.pathname === pathname;
 
   let left = (
     <div className="left">
-      <Link href="/">
-        <a className="bold" data-active={isActive("/")}>
-          Feed
-        </a>
+      <Link href="/" className={`bold ${isActive("/") ? "active" : ""}`}>
+        Feed
       </Link>
       <style jsx>{`
         .bold {
           font-weight: bold;
         }
 
-        a {
+        .left :global(a) {
           text-decoration: none;
           color: #000;
           display: inline-block;
         }
 
-        .left a[data-active="true"] {
+        .left :global(.active) {
           color: gray;
         }
 
-        a + a {
+        .left :global(a + a) {
           margin-left: 1rem;
         }
       `}</style>
